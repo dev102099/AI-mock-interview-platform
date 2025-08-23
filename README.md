@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Interview Buddy 🚀
+An AI-powered mock interview platform designed to get you interview-ready. Craft personalized interviews, get real-time feedback, and practice with an intelligent agent to build your confidence.
+
+## Description
+
+Interview Buddy is a cutting-edge platform that leverages the power of generative AI to provide a realistic and effective mock interview experience. Whether you're preparing for a technical role or a behavioral assessment, our platform allows you to create, share, and take interviews tailored to your specific needs. Our custom-built AI agent, powered by advanced TTS, STT, and LLM technologies, acts as your personal interviewer, providing insightful feedback to help you improve and land your dream job.
+
+## Key Features ✨
+
+Craft Custom Interviews: Easily create personalized interview sessions by defining the role, tech stack, and specific questions you want to practice.
+
+Community Interviews: Take interviews created and shared by other users to experience a wide range of questions and scenarios.
+
+Agentic AI Interviewer: Our intelligent AI agent guides you through the interview process, asking questions and understanding your responses in real-time.
+
+Performance Feedback: Receive detailed, AI-generated feedback on your performance, highlighting your strengths and areas for improvement.
+
+Secure Authentication: User data and privacy are protected through a secure login system powered by Firebase.
+
+## Tech Stack 🛠️
+
+Frontend: React, Next.js, Tailwind CSS
+
+UI Components: Shadcn/ui
+
+Language: TypeScript
+
+AI Agent:
+
+Text-to-Speech (TTS): For voice generation.
+
+Speech-to-Text (STT): For transcribing user responses.
+
+Large Language Model (LLM): For generating questions and feedback.
+
+Backend & Database: Firebase (Authentication, Firestore)
+
+Schema Validation: Zod
 
 ## Getting Started
 
-First, run the development server:
+Follow these instructions to get a local copy of the project up and running for development and testing purposes.
 
-```bash
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+Node.js (v18 or later)
+
+npm or yarn
+
+### Installation
+
+- Clone the repository:
+
+git clone https://github.com/your-username/interview-buddy.git
+cd interview-buddy
+
+- Install dependencies:
+
+npm install
+
+# or
+
+yarn install
+
+- Set up Environment Variables:
+
+FIREBASE_PROJECT_ID  
+FIREBASE_PRIVATE_KEY  
+FIREBASE_CLIENT_EMAIL
+GOOGLE_GENERATIVE_AI_API_KEY
+DEEPGRAM_API_KEY
+
+- Run the development server:
+
 npm run dev
+
 # or
+
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

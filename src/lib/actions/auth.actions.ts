@@ -100,3 +100,32 @@ export async function isAuthenticated(){
     const user = await getCurrentUser();
     return !!user
 }
+
+
+
+export async function logOut() {
+  const Cookie = await cookies()
+  const sessionCookie =  Cookie.get('session')?.value;
+  if (!sessionCookie) {
+    return { success: true };
+  }
+
+  try {
+    // 1. Verify the cookie to get the user's UID
+    const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+    const uid = decodedClaims.sub
+
+    // 2. Revoke the user's refresh tokens for security
+    await auth.revokeRefreshTokens(uid);
+
+    // 3. Clear the session cookie from the browser
+    Cookie.delete("session");
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error signing out:", error);
+    // Even if revocation fails, try to clear the cookie as a fallback
+    Cookie.delete("session");
+    return { success: false };
+  }
+}

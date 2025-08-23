@@ -3,9 +3,7 @@ import { google } from "@ai-sdk/google";
 import { getRandomInterviewCover } from '@/lib/utils';
 import { db } from '../../../../../firebase/admin';
 
-export async function GET(){
-    return Response.json({ message : 'Hello from Vapi' }, {status: 201});
-}
+
 
 export async function POST(request: Request) {
     const {type, role, techstack, level, amount, userid} = await request.json();
@@ -31,7 +29,7 @@ prompt : `Prepare questions for a job interview.
         const interview = {
             userId: userid,
             role,
-            techstack: techstack.split(','),
+            techstack: techstack,
             level,
             type,
             coverImage: getRandomInterviewCover(),

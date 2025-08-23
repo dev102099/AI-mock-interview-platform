@@ -156,39 +156,27 @@ End the conversation on a polite and positive note.
 };
 
 export const feedbackSchema = z.object({
-  totalScore: z.number(),
-  categoryScores: z.tuple([
-    z.object({
-      name: z.literal("Communication Skills"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Technical Knowledge"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Problem Solving"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Cultural Fit"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Confidence and Clarity"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-  ]),
-  strengths: z.array(z.string()),
-  areasForImprovement: z.array(z.string()),
-  finalAssessment: z.string(),
-});
+  // Scores are now separate, top-level properties
+  communicationScore: z.number()
+    .describe("Score for Communication Skills (0-100)."),
+  technicalKnowledgeScore: z.number()
+    .describe("Score for Technical Knowledge (0-100)."),
+  problemSolvingScore: z.number()
+    .describe("Score for Problem-Solving (0-100)."),
+  culturalFitScore: z.number()
+    .describe("Score for Cultural & Role Fit (0-100)."),
+  confidenceScore: z.number()
+    .describe("Score for Confidence & Clarity (0-100)."),
 
+  // Arrays of simple strings are generally safe
+  strengths: z.array(z.string())
+    .describe("A list of the candidate's strengths."),
+  areasForImprovement: z.array(z.string())
+    .describe("A list of areas for improvement."),
+  
+  finalAssessment: z.string()
+    .describe("A final, overall summary of the interview performance."),
+});
 export const interviewCovers = [
   "/adobe.png",
   "/amazon.png",

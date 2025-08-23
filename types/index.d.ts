@@ -26,9 +26,9 @@ interface Interview {
 }
 
 interface CreateFeedbackParams {
-  interviewId: string;
-  userId: string;
-  transcript: { role: string; content: string }[];
+  interviewId: string|undefined;
+  userId: string|undefined;
+  transcript: [];
   feedbackId?: string;
 }
 
@@ -39,7 +39,7 @@ interface User {
 }
 
 interface InterviewCardProps {
-  interviewId?: string;
+  id?: string;
   userId?: string;
   role: string;
   type: string;
@@ -67,7 +67,7 @@ interface GetFeedbackByInterviewIdParams {
 }
 
 interface GetLatestInterviewsParams {
-  userId: string;
+  userId: string | undefined;
   limit?: number;
 }
 
