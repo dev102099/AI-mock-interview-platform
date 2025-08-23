@@ -1,4 +1,5 @@
-Interview Buddy 🚀
+## Interview Buddy 🚀
+
 An AI-powered mock interview platform designed to get you interview-ready. Craft personalized interviews, get real-time feedback, and practice with an intelligent agent to build your confidence.
 
 ## Description
@@ -46,25 +47,22 @@ Follow these instructions to get a local copy of the project up and running for 
 Make sure you have the following installed on your machine:
 
 Node.js (v18 or later)
-
 npm or yarn
 
 ### Installation
 
-- Clone the repository:
+1. Clone the repository:
 
 git clone https://github.com/your-username/interview-buddy.git
 cd interview-buddy
 
-- Install dependencies:
+2. Install dependencies:
 
 npm install
-
-# or
-
+or
 yarn install
 
-- Set up Environment Variables:
+3. Set up Environment Variables:
 
 FIREBASE_PROJECT_ID  
 FIREBASE_PRIVATE_KEY  
@@ -72,10 +70,8 @@ FIREBASE_CLIENT_EMAIL
 GOOGLE_GENERATIVE_AI_API_KEY
 DEEPGRAM_API_KEY
 
-- Run the development server:
+4. Run the development server:
 
 npm run dev
-
-# or
-
+or
 yarn dev
