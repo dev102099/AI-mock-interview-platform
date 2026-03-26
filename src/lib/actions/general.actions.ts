@@ -1,49 +1,64 @@
-'use server'
+"use server";
 import { google } from "@ai-sdk/google";
 import { db } from "../../../firebase/admin";
 import { generateObject } from "ai";
 import { feedbackSchema } from "../../../constant";
 
-export async function getInterviewDataByUserId(userId:string): Promise<Interview[]|null> {
-    try {
-        const response = await db.collection('interviews').where('userId', '==', userId).orderBy('createdAt', 'desc').get();
-        return response.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        })) as Interview[];
-    } catch (error) {
-        console.error("Error fetching interview data:", error);
-        return null;
-    }
+export async function getInterviewDataByUserId(
+  userId: string,
+): Promise<Interview[] | null> {
+  try {
+    const response = await db
+      .collection("interviews")
+      .where("userId", "==", userId)
+      .orderBy("createdAt", "desc")
+      .get();
+    return response.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Interview[];
+  } catch (error) {
+    console.error("Error fetching interview data:", error);
+    return null;
+  }
 }
 
-export async function getAllInterviewData(params:GetLatestInterviewsParams): Promise<Interview[]|null> {
-    try {
-        const {userId,limit=20} = params ;
-        const response = await db.collection('interviews').where('finalised', '==', true).orderBy('createdAt', 'desc').get();
-        
-        const allInterviews = response.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        })) as Interview[];
-        const otherUsersInterviews = allInterviews.filter(interview => interview.userId !== userId);
+export async function getAllInterviewData(
+  params: GetLatestInterviewsParams,
+): Promise<Interview[] | null> {
+  try {
+    const { userId, limit = 20 } = params;
+    const response = await db
+      .collection("interviews")
+      .where("finalised", "==", true)
+      .orderBy("createdAt", "desc")
+      .get();
 
-        
-        return otherUsersInterviews.slice(0, limit);
-    } catch (error) {
-        console.error("Error fetching interview data:", error);
-        return null;
-    }
+    const allInterviews = response.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Interview[];
+    const otherUsersInterviews = allInterviews.filter(
+      (interview) => interview.userId !== userId,
+    );
+
+    return otherUsersInterviews.slice(0, limit);
+  } catch (error) {
+    console.error("Error fetching interview data:", error);
+    return null;
+  }
 }
 
-export async function getInterviewDataById(id:string): Promise<Interview|null> {
-    try {
-        const response = await db.collection('interviews').doc(id).get();
-        return response.data() as Interview | null;
-    } catch (error) {
-        console.error("Error fetching interview data:", error);
-        return null;
-    }
+export async function getInterviewDataById(
+  id: string,
+): Promise<Interview | null> {
+  try {
+    const response = await db.collection("interviews").doc(id).get();
+    return response.data() as Interview | null;
+  } catch (error) {
+    console.error("Error fetching interview data:", error);
+    return null;
+  }
 }
 
 export async function createFeedback(params: CreateFeedbackParams) {
@@ -52,7 +67,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
   try {
     const { object } = await generateObject({
       // Use a valid, current model name
-      model: google("gemini-1.5-flash-latest"),
+      model: google("gemini-2.5-flash"),
       schema: feedbackSchema,
       // ✅ 2. The prompt is updated to match the flattened schema
       prompt: `
@@ -95,11 +110,11 @@ export async function createFeedback(params: CreateFeedbackParams) {
     const totalScore = scores.reduce((a, b) => a + b, 0) / scores.length;
 
     const categoryScores = {
-      "CommunicationSkills": communicationScore,
-      "TechnicalKnowledge": technicalKnowledgeScore,
-      "ProblemSolving": problemSolvingScore,
-      "CulturalRoleFit": culturalFitScore,
-      "ConfidenceClarity": confidenceScore,
+      CommunicationSkills: communicationScore,
+      TechnicalKnowledge: technicalKnowledgeScore,
+      ProblemSolving: problemSolvingScore,
+      CulturalRoleFit: culturalFitScore,
+      ConfidenceClarity: confidenceScore,
     };
 
     // ✅ 5. Build the final feedback object for the database
@@ -131,7 +146,7 @@ export async function createFeedback(params: CreateFeedbackParams) {
 }
 
 export async function getFeedbackByInterviewId(
-  params: GetFeedbackByInterviewIdParams
+  params: GetFeedbackByInterviewIdParams,
 ): Promise<Feedback | null> {
   const { interviewId, userId } = params;
 
@@ -139,7 +154,7 @@ export async function getFeedbackByInterviewId(
     .collection("feedback")
     .where("interviewId", "==", interviewId)
     .where("userId", "==", userId)
-    .orderBy('createdAt','desc')
+    .orderBy("createdAt", "desc")
     .limit(1)
     .get();
 
