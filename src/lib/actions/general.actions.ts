@@ -8,6 +8,7 @@ export async function getInterviewDataByUserId(
   userId: string,
 ): Promise<Interview[] | null> {
   try {
+    console.log(userId);
     const response = await db
       .collection("interviews")
       .where("userId", "==", userId)
