@@ -1,3 +1,5 @@
+** THE DEPLOYED VERSION IS JUST FOR DEMO TO GET AN IDEA AS IT HAS LIMITED GEMINI API RESOURCES. PLEASE COPY THE REPO ON YOUR OWN SYSTEMS AND USE YOUR OWN API KEYS WITH ENOUGH RESOURCES FOR THE FULL EXPERIENCE **
+
 ## Interview Buddy 🚀
 
 An AI-powered mock interview platform designed to get you interview-ready. Craft personalized interviews, get real-time feedback, and practice with an intelligent agent to build your confidence.
